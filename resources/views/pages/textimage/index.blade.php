@@ -70,31 +70,21 @@
                             <td>
 
 
-                                @foreach($photos as $ath)
-                                @endforeach
-                                @if($hod1->id != $ath->photo_id)
-                                N/A
-
-                                @else
-                            <?php $i=1 ?>
+                              
+                              <?php $i=1;$xx=0; ?>
 
                             @foreach($photos as $ath)
                             @if($hod1->id == $ath->photo_id)
-                            {{-- <div id="{{$ath->id}}"> --}}
-
+                            <?php $xx=2 ?>
                                 <p>&nbsp;<b><a href="{{asset('photos')}}/{{$ath->photo}}" target="_blank">Attachment {{$i++}}</b>&emsp;</a>
-
-
-                                {{-- </div> --}}
                                     @endif
 
                             @endforeach
+                        
+                            @if($xx!=2)
+
+                            No Attachment Given
                             @endif
-                            </div>
-                                    </div>
-                                    </div>
-
-
                                 </td>
                                 @can('manage-users')
                                <td>
