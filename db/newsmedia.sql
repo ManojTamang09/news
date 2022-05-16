@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2022 at 11:52 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- Generation Time: May 16, 2022 at 08:27 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -34,7 +35,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -84,7 +85,7 @@ CREATE TABLE `personal_access_tokens` (
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -103,16 +104,6 @@ CREATE TABLE `photos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `photos`
---
-
-INSERT INTO `photos` (`id`, `photo_id`, `photo`, `created_at`, `updated_at`) VALUES
-(12, 17, 'SInrFXjimSTtDAgwu0Aceh9xqOh7JBvLdtliw7fJ.png', '2022-05-06 01:36:17', '2022-05-06 01:36:17'),
-(13, 17, 'uEJx0CaPICOIC4pGVxlILm4eIEUFYqeiERbkWOFX.png', '2022-05-06 01:36:17', '2022-05-06 01:36:17'),
-(14, 18, 'BIXAu0SiQEXwIG2eac0Z5T62OhYNceFnDVd9fvSt.png', '2022-05-06 01:36:17', '2022-05-06 01:36:17'),
-(15, 18, 'jMu50jSgGdpyIgOW2iBHKq2Qjw71hBZRleYyRaLA.png', '2022-05-06 01:37:28', '2022-05-06 01:37:28');
 
 -- --------------------------------------------------------
 
@@ -154,7 +145,21 @@ CREATE TABLE `role_user` (
 --
 
 INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(4, 2, 9, NULL, NULL);
+(1, 1, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `document` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -171,15 +176,6 @@ CREATE TABLE `upload_text_images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `upload_text_images`
---
-
-INSERT INTO `upload_text_images` (`id`, `heading`, `description`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(17, 'What is Lorem Ipsum?', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, 9, '2022-05-06 01:36:17', '2022-05-06 01:36:17'),
-(18, 'sad', 'sadasd', 1, 9, '2022-05-06 01:37:23', '2022-05-06 01:37:23'),
-(19, 'asd', 'asdasd', 0, 9, '2022-05-06 01:37:28', '2022-05-06 01:37:28');
 
 -- --------------------------------------------------------
 
@@ -205,8 +201,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `contact`, `role_id`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(9, 'demo1', 'demoadmin@gov.in', 9876543210, 1, NULL, '$2y$10$fkN6umn0OCjcHvyjFdxDReCaAiIvryeB7uCaFjQp906x8O0APDpoO', NULL, '2022-05-02 00:56:30', '2022-05-02 00:57:03'),
-(10, 'dd', 'demouser@gov.in', 9876543210, 1, NULL, '$2y$10$qiAZe.K7tXuLZ5oUQ1oyr.KQs7UiWkMg8AQtVBY4c3Nqui5UhDm6S', NULL, '2022-05-05 00:36:10', '2022-05-05 00:36:10');
+(1, 'demo1', 'demoadmin@gov.in', 9876543210, 1, NULL, '$2y$10$fkN6umn0OCjcHvyjFdxDReCaAiIvryeB7uCaFjQp906x8O0APDpoO', NULL, '2022-05-02 00:56:30', '2022-05-02 00:57:03');
 
 -- --------------------------------------------------------
 
@@ -227,44 +222,14 @@ CREATE TABLE `videos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `videos`
---
-
-INSERT INTO `videos` (`id`, `user_id`, `status`, `heading`, `description`, `title_photo`, `document`, `created_at`, `updated_at`) VALUES
-(1, 9, 1, 'What is Lorem Ipsum?', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'p9Xu3iq0pjEBGFLnIjub7FO2roWIS2SctDpgOdcf.png', 'RnvR1MeiwSN3qH7xqNbfWQsPGAiT9ECxKwP0KT64.mkv', '2022-05-04 05:02:35', '2022-05-13 00:53:29'),
-(2, 9, 1, 'Why do we use it?', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'UHGSjoP0HVW4kY3mhpNIrlybTjBxJ0ZvNUzzo3cA.png', 'dlb5bxkKwVzcrQ7z1xPw7YRsLNg0bCKdTjY4qbrk.mp4', '2022-05-04 05:04:02', '2022-05-12 00:52:28'),
-(3, 9, 1, 'Why do we use it?', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 'r358Ra7sbYzH0eMK6oojgSGE2Vln8iMf6k8q3NHc.png', '8I8syloja7Gb2urcdvMsnt95xtrGw9lHBOvI4bAK.mp4', '2022-05-12 00:24:51', '2022-05-12 00:48:09');
-
---
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
 
 --
 -- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `photos`
@@ -285,6 +250,12 @@ ALTER TABLE `role_user`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `upload_text_images`
 --
 ALTER TABLE `upload_text_images`
@@ -294,8 +265,7 @@ ALTER TABLE `upload_text_images`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `videos`
@@ -308,18 +278,6 @@ ALTER TABLE `videos`
 --
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
@@ -329,7 +287,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `role_user`
@@ -338,22 +302,28 @@ ALTER TABLE `role_user`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `upload_text_images`
 --
 ALTER TABLE `upload_text_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

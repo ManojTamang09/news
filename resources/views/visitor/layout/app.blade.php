@@ -164,7 +164,7 @@
                 <nav>
                     <!--Desktop menu-->
                     <ul class="main-menu d-none d-lg-inline font-small">
-                        <li class="menu-item-has-children">
+                        <li>
                             <a href="/">Home</a>
                         </li>
                         <li> <a href="{{route('postdetails')}}">Posts</a> </li>

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UploadTextImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Models\Photo;
+use App\Models\Slider;
 use App\Models\UploadTextImage;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +34,9 @@ Route::get('/', function () {
     ->select('videos.*')
     ->where('videos.status',$flag)
     ->orderBy('id', 'desc')->get();
-return view('visitor.welcome',compact('images','photos','video'));
+
+    $sliders= Slider::orderBy('id', 'desc')->take(4)->get();
+    return view('visitor.welcome',compact('images','photos','video','sliders'));
 });
 
 Auth::routes();
@@ -49,6 +53,7 @@ Route::group(['middleware' => 'auth'],function()
     Route::get('/video/final',[App\Http\Controllers\VideoController::class, 'final'])->name('video.final');
     Route::post('/approvevideo/{id}',[App\Http\Controllers\VideoController::class, 'approvevideo'])->name('approvevideo');
     Route::resource('/video',VideoController::class);
+    Route::resource('/slider',SliderController::class);
 });
 
     Route::get('/visitor/{id}', [App\Http\Controllers\PagesController::class, 'details'])->name('visitor.details');
